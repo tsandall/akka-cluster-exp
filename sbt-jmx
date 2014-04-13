@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+    echo "usage: $0 <jmx-port> [sbt-command [args...] ]"
+    exit 1
+fi
+
+
+port=$1
+shift 1
+
+sbt -J-Dcom.sun.management.jmxremote.port=$port \
+    -J-Dcom.sun.management.jmxremote.authenticate=false \
+    -J-Dcom.sun.management.jmxremote.ssl=false \
+    "$@"
